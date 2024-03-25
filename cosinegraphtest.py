@@ -19,17 +19,20 @@ class MyStaticMplCanvas(MyMplCanvas):
         self.compute_initial_figure()
 
     def compute_initial_figure(self):
-        # Here you can replace this with your own data
-        data_sets = {
-            'Computer science ': calculate_cosine_similarity(job_skills, resume_skills1),
-            'Project manager': calculate_cosine_similarity(job_skills, resume_skills2),
-            'Financial Analyst': calculate_cosine_similarity(job_skills, resume_skills3)
-        }
-        for i, (name, score) in enumerate(data_sets.items()):
-            self.axes.bar(i, score, color='b', label=name)
-        self.axes.set_ylim([0, 1])
-        self.axes.set_ylabel('Cosine Similarity Score')
-        self.axes.legend()
+      # Here you can replace this with your own data
+      data_sets = {
+          'Computer science ': calculate_cosine_similarity(job_skills, resume_skills1),
+          'Project manager': calculate_cosine_similarity(job_skills, resume_skills2),
+          'Financial Analyst': calculate_cosine_similarity(job_skills, resume_skills3)
+      }
+      names = list(data_sets.keys())
+      scores = list(data_sets.values())
+      self.axes.bar(names, scores, color='b')
+      self.axes.set_ylim([0, 1])
+      self.axes.set_ylabel('Cosine Similarity Score')
+      self.axes.set_xticks(range(len(names)))
+      self.axes.set_xticklabels(names, rotation=45)
+
 
 class ApplicationWindow(QMainWindow):
     def __init__(self):
